@@ -1,26 +1,71 @@
 @import "tailwindcss";
 
 :root {
+  --color-salmon: #fa8072;
+  --color-salmon-dark: #d86e5c;
+  --color-gray-card: #e7e7e7;
+  --color-text-primary: #3f3f3f;
+  --color-text-secondary: #868686;
+  --color-text-muted: #919191;
+  --color-text-light: #b3b3b3;
   --background: #ffffff;
-  --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html, body {
+    height: 100%;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  .font-geologica {
+    font-family: var(--font-geologica), "Geologica", sans-serif;
+  }
+
+  .font-playfair {
+    font-family: var(--font-playfair), "Playfair Display", serif;
   }
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-text-primary);
+}
+
+/* Cursor-follow parallax on slide elements */
+.parallax-el {
+  --cursor-tx: 0px;
+  --cursor-ty: 0px;
+  transform: translate(var(--cursor-tx), var(--cursor-ty));
+  transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+  will-change: transform;
+}
+
+/* Parallax effect on slide-in elements — overrides cursor-follow during animation */
+.parallax-slide-in .parallax-el {
+  animation: parallaxSlideIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transition: none !important;
+}
+
+.parallax-slide-in .parallax-el:nth-child(1)  { animation-delay: 0.03s; --parallax-distance: 180px; }
+.parallax-slide-in .parallax-el:nth-child(2)  { animation-delay: 0.1s;  --parallax-distance: 120px; }
+.parallax-slide-in .parallax-el:nth-child(3)  { animation-delay: 0.17s; --parallax-distance: 220px; }
+.parallax-slide-in .parallax-el:nth-child(4)  { animation-delay: 0.22s; --parallax-distance: 150px; }
+.parallax-slide-in .parallax-el:nth-child(5)  { animation-delay: 0.12s; --parallax-distance: 200px; }
+.parallax-slide-in .parallax-el:nth-child(6)  { animation-delay: 0.19s; --parallax-distance: 130px; }
+.parallax-slide-in .parallax-el:nth-child(7)  { animation-delay: 0.06s; --parallax-distance: 170px; }
+.parallax-slide-in .parallax-el:nth-child(8)  { animation-delay: 0.15s; --parallax-distance: 210px; }
+.parallax-slide-in .parallax-el:nth-child(9)  { animation-delay: 0.09s; --parallax-distance: 140px; }
+.parallax-slide-in .parallax-el:nth-child(10) { animation-delay: 0.2s;  --parallax-distance: 190px; }
+
+@keyframes parallaxSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(calc(var(--slide-dir, 1) * var(--parallax-distance, 160px)));
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
