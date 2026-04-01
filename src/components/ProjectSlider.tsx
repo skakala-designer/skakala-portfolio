@@ -110,8 +110,25 @@ export default function ProjectSlider({ slides }: ProjectSliderProps) {
           const isLeaving = leaving === i;
           const isEntering = entering === i;
           const isCurrent = current === i && !animating;
+          const isAdjacentPrev = i === current - 1;
+          const isAdjacentNext = i === current + 1;
+          const isPreload = (isAdjacentPrev || isAdjacentNext) && !isLeaving && !isEntering;
 
-          if (!isCurrent && !isLeaving && !isEntering) return null;
+          if (!isCurrent && !isLeaving && !isEntering && !isPreload) return null;
+
+          // Preloaded adjacent slides: render hidden off-screen for image loading
+          if (isPreload) {
+            return (
+              <div
+                key={i}
+                className="absolute inset-0 pointer-events-none"
+                style={{ opacity: 0, zIndex: 0 }}
+                aria-hidden
+              >
+                {slide}
+              </div>
+            );
+          }
 
           return (
             <div

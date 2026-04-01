@@ -122,7 +122,7 @@ export function ZeropsSlide03() {
           src="/images/zerops/zerops 03-01.png"
           alt="Zerops mobile view"
           fill
-          className="object-cover"
+          className="object-cover object-top"
         />
       </div>
       <div
@@ -138,7 +138,7 @@ export function ZeropsSlide03() {
           src="/images/zerops/zerops 03-02.png"
           alt="Zerops desktop view"
           fill
-          className="object-cover"
+          className="object-cover object-top"
         />
       </div>
     </div>
@@ -328,7 +328,7 @@ export function ZeropsSlide05() {
           src="/images/zerops/zerops 04-11.png"
           alt="Zerops blog mobile"
           fill
-          className="object-cover"
+          className="object-cover object-top"
         />
       </div>
       <div
@@ -344,7 +344,7 @@ export function ZeropsSlide05() {
           src="/images/zerops/zerops 04-12.png"
           alt="Zerops blog desktop"
           fill
-          className="object-cover"
+          className="object-cover object-top"
         />
       </div>
     </div>
@@ -367,7 +367,7 @@ export function ZeropsSlide06() {
           src="/images/zerops/zerops 05-01.png"
           alt="Zerops infrastructure mobile"
           fill
-          className="object-cover"
+          className="object-cover object-top"
         />
       </div>
       <div
@@ -383,7 +383,7 @@ export function ZeropsSlide06() {
           src="/images/zerops/zerops 05-02.png"
           alt="Zerops infrastructure desktop"
           fill
-          className="object-cover"
+          className="object-cover object-top"
         />
       </div>
     </div>

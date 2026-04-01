@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geologica, Playfair_Display } from "next/font/google";
+import { Geologica, Playfair } from "next/font/google";
 import "./globals.css";
 
 const geologica = Geologica({
@@ -8,10 +8,10 @@ const geologica = Geologica({
   weight: ["300", "400", "500", "600"],
 });
 
-const playfair = Playfair_Display({
+const playfair = Playfair({
   variable: "--font-playfair",
   subsets: ["latin"],
-  weight: ["400"],
+  axes: ["wdth", "opsz"],
 });
 
 export const metadata: Metadata = {

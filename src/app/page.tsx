@@ -9,6 +9,13 @@ import {
   ZeropsSlide05,
   ZeropsSlide06,
 } from "@/components/ZeropsSlides";
+import {
+  InteractiveSlide01,
+  InteractiveSlide02,
+  InteractiveSlide03,
+  InteractiveSlide04,
+  InteractiveSlide05,
+} from "@/components/InteractiveSlides";
 
 const awards = [
   { src: "/images/awards/01 Red Dot 2022.png", alt: "Red Dot 2022" },
@@ -67,14 +74,14 @@ export default function Home() {
       <div className="h-[88px] w-full shrink-0" />
 
       {/* Main content area */}
-      <div className="flex flex-col items-center w-full max-w-[1728px] px-[274px] pt-[253px]">
+      <div className="flex flex-col items-center w-full pt-[253px]">
         {/* Hero text */}
         <div className="mb-[256px]">
           <HeroTitle />
         </div>
 
         {/* Projects */}
-        <div className="flex flex-col gap-[24px] w-full max-w-[1180px]">
+        <div className="flex flex-col gap-[24px] w-[1180px]">
           {/* Zerops project */}
           <ProjectSlider
             slides={[
@@ -87,6 +94,17 @@ export default function Home() {
             ]}
           />
 
+          {/* Interactive project */}
+          <ProjectSlider
+            slides={[
+              <InteractiveSlide01 key="i01" />,
+              <InteractiveSlide02 key="i02" />,
+              <InteractiveSlide03 key="i03" />,
+              <InteractiveSlide04 key="i04" />,
+              <InteractiveSlide05 key="i05" />,
+            ]}
+          />
+
           {/* Placeholder project cards - to be filled later */}
           <PlaceholderCard label="Direct" description="Design system" />
           <PlaceholderCard
@@ -94,7 +112,6 @@ export default function Home() {
             description="Logo&#10;Brand Visual&#10;Web"
           />
           <PlaceholderCard label="Reels" />
-          <PlaceholderCard label="Interactive" />
           <PlaceholderCard label="Cyrkl" description="Web app&#10;Design system" />
           <PlaceholderCard label="Masoprofit" description="Application" />
           <PlaceholderCard label="Motion" description="Motion design" />

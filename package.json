@@ -9,6 +9,10 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@rive-app/react-canvas": "^4.27.2",
+    "@rive-app/react-webgl": "^4.27.2",
+    "@rive-app/react-webgl2": "^4.27.3",
+    "@rive-app/webgl2": "^2.36.0",
     "next": "16.2.1",
     "react": "19.2.4",
     "react-dom": "19.2.4"

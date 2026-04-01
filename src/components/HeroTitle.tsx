@@ -58,20 +58,22 @@ export default function HeroTitle() {
       {/* Container sized for max state composition */}
       <div className="relative" style={{ width: "415px", height: "113px" }}>
         <span
-          className="font-playfair text-[56px] text-[var(--color-text-muted)] leading-none absolute top-0"
+          className="font-playfair text-[56px] text-[#3F3F3F] leading-none absolute top-0"
           style={{
             left: `${almostBaseX + almostX}px`,
             transition: "left 0.15s ease-out",
+            fontVariationSettings: "'wdth' 102, 'wght' 337, 'opsz' 299",
           }}
         >
           Almost
         </span>
         <span
-          className="font-playfair text-[56px] text-[var(--color-text-muted)] leading-none absolute"
+          className="font-playfair text-[56px] text-[#3F3F3F] leading-none absolute"
           style={{
             left: `${anythingBaseX + anythingX}px`,
             top: "37.5px",
             transition: "left 0.15s ease-out",
+            fontVariationSettings: "'wdth' 102, 'wght' 337, 'opsz' 299",
           }}
         >
           anything
