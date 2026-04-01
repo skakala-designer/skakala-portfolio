@@ -1,17 +1,13 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
-import {
-  useRive,
-  Layout,
-  Fit,
-  Alignment,
-} from "@rive-app/react-webgl2";
+import { useState, useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
 
-/* Rive embed with visibility-based play/pause.
-   - Defers initial mount until the element scrolls into view.
-   - Pauses the animation when scrolled off-screen, resumes when visible.
-   This keeps only the active slide's WebGL context busy. */
+/* Lazy-load the Rive inner component so @rive-app/react-webgl2
+   is never evaluated during SSR (it accesses WebGL2/WASM globals). */
+const RiveInner = dynamic(() => import("./RiveInner"), { ssr: false });
+
+/* Wrapper: defers mounting until visible, pauses when off-screen. */
 function RiveEmbed({
   src,
   width,
@@ -19,7 +15,7 @@ function RiveEmbed({
   className,
   artboard,
   stateMachines,
-  fit = Fit.Cover,
+  fit,
   autoBind = false,
 }: {
   src: string;
@@ -28,47 +24,39 @@ function RiveEmbed({
   className?: string;
   artboard?: string;
   stateMachines?: string;
-  fit?: Fit;
+  fit?: string;
   autoBind?: boolean;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [mounted, setMounted] = useState(false);
-
-  const { rive, RiveComponent } = useRive(
-    mounted
-      ? {
-          src,
-          artboard: artboard || undefined,
-          stateMachines: stateMachines || undefined,
-          layout: new Layout({ fit, alignment: Alignment.Center }),
-          autoplay: true,
-          autoBind,
-        }
-      : null
-  );
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          if (!mounted) setMounted(true);
-          rive?.play();
-        } else if (mounted) {
-          rive?.pause();
+          setVisible(true);
+          observer.disconnect();
         }
       },
       { threshold: 0.01 }
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [mounted, rive]);
+  }, []);
 
   return (
     <div ref={containerRef} style={{ width, height }} className={className}>
-      {mounted && <RiveComponent />}
+      {visible && (
+        <RiveInner
+          src={src}
+          artboard={artboard}
+          stateMachines={stateMachines}
+          fit={fit}
+          autoBind={autoBind}
+        />
+      )}
     </div>
   );
 }
@@ -110,7 +98,7 @@ export function InteractiveSlide02() {
         height={664}
         artboard="Hill Game"
         stateMachines="Hill Game"
-        fit={Fit.Contain}
+        fit="contain"
         autoBind
       />
     </div>
